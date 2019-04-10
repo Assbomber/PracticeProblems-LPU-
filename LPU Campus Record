@@ -1,0 +1,149 @@
+/* write a program to store info of 5 department of lPU campus, 1 cse,2 ele, 3 mec, 4 civ, 5 chem. all these
+dep. have two imp. category of entity 1..student, 2 staff. Staff is divided into 2 category...technical and non
+tech..Then technical is divided into admin and class 4 employee. with the valid attrib. ,name, Blood group,age
+Dob, address, Staff Id, registration number
+ */
+
+import java.util.Scanner;
+
+class Departments{
+    String name, blood, address;
+    int age, staffid, regno;
+
+    public void head(){                         //Openin menu
+        System.out.println("WELCOME TO LPU CAMPUS");
+        System.out.println("Choose the type of account:");
+        System.out.println("1) STAFF");
+        System.out.println("2) STUDENT");
+    }
+
+    public void displaydep(){                      // Openin menu 2
+        System.out.println("Choose your Department: ");
+        System.out.println("1) CSE");
+        System.out.println("2) ELE");
+        System.out.println("3) MEC");
+        System.out.println("4) CIV");
+        System.out.println("5) CHEM");
+    }
+
+    public void assign(){                          //Requesting info 1
+        Scanner s= new Scanner(System.in);
+        System.out.println("enter your Name: "); name=s.nextLine();
+        System.out.println("enter your Blood Group: "); blood=s.nextLine();
+        System.out.println("enter your Address: "); address=s.nextLine();
+        System.out.println("enter your Age: "); age=s.nextInt();
+        System.out.println("enter your StaffId: "); staffid=s.nextInt();
+        System.out.println("enter your regno: "); regno=s.nextInt();
+    }
+
+    public void controller(){
+        int option1;
+        Departments obj1=new Departments();     //obj1 initialized | task assigned=output displaydep()
+        Departments[] techadmin_dep=new Departments[5];
+        Departments[] techclass4_dep=new Departments[5];
+        Departments[] nontech_dep=new Departments[5];
+        Departments[] student_dep=new Departments[5];
+        obj1.head();
+        Scanner scan = new Scanner(System.in);
+        option1=scan.nextInt();
+        switch(option1){
+            case 1: System.out.println("--------------------------------->STAFF");
+                System.out.println("1) TECHNICAL");
+                System.out.println("2) NON-TECHNICAL");
+                option1=scan.nextInt();
+                if(option1==1){ System.out.println("--------------------------------->STAFF>TECHNICAL");
+                    System.out.println("1) ADMIN");
+                    System.out.println("2) CLASS 4 EMPLOYEE");
+                    option1=scan.nextInt();
+                    if(option1==1){System.out.println("--------------------------------->STAFF>TECHNICAL>ADMIN");
+                        obj1.displaydep();
+                        option1=scan.nextInt();
+                        --option1;
+
+                        techadmin_dep[option1]=new Departments();
+                        techadmin_dep[option1].assign();
+                    }
+                    else{System.out.println("--------------------------------->STAFF>TECHNICAL>CLASS 4 EMPOYEES");
+                        obj1.displaydep();
+                        option1=scan.nextInt();
+                        --option1;
+
+                        techclass4_dep[option1]=new Departments();
+                        techclass4_dep[option1].assign();
+                    }
+
+
+                }
+                else{System.out.println("--------------------------------->STAFF>NON-TECHNICAL");
+                    obj1.displaydep();
+                    option1=scan.nextInt();
+                    --option1;
+
+                    nontech_dep[option1]=new Departments();
+                    nontech_dep[option1].assign();
+                }
+                break;
+            case 2:System.out.println("--------------------------------->STUDENT");
+                obj1.displaydep();
+                int opt=scan.nextInt();
+                --opt;
+
+                student_dep[opt]=new Departments();
+                student_dep[opt].assign();
+                break;
+        }
+
+        System.out.println("Do You want to Fetch a Record? ");
+        option1=scan.nextInt();
+        if(option1==1){
+            obj1.head();
+            option1=scan.nextInt();
+            if(option1==1){
+                System.out.println("1) TECHNICAL");
+                System.out.println("2) NON-TECHNICAL");
+                option1=scan.nextInt();
+                if(option1==1){
+                    System.out.println("1) ADMIN");
+                    System.out.println("2) CLASS 4 EMPLOYEE");
+                    option1=scan.nextInt();
+                    if(option1==1){
+                        obj1.displaydep();
+                        option1=scan.nextInt(); --option1;
+                        System.out.println("name: "+techadmin_dep[option1].name+" Blood Group: "+techadmin_dep[option1].blood+" RegNo: "
+                                +techadmin_dep[option1].regno);
+                    }
+                    else{
+                        obj1.displaydep();
+                        option1=scan.nextInt(); --option1;
+                        System.out.println("name: "+techclass4_dep[option1].name+" Blood Group: "+techclass4_dep[option1].blood+" RegNo: "
+                                +techclass4_dep[option1].regno);
+                    }
+                }
+                else{
+                    obj1.displaydep();
+                    option1=scan.nextInt(); --option1;
+                    System.out.println("name: "+nontech_dep[option1].name+" Blood Group: "+nontech_dep[option1].blood+" RegNo: "
+                            +nontech_dep[option1].regno);
+                }
+            }
+            else{
+                obj1.displaydep();
+                option1=scan.nextInt(); --option1;
+                System.out.println("name: "+student_dep[option1].name+" Blood Group: "+student_dep[option1].blood+" RegNo: "
+                        +student_dep[option1].regno);
+            }
+
+            }
+
+        }
+    }
+
+class Main {
+    public static void main(String[] args) {
+        Scanner myscan = new Scanner(System.in);
+        Departments calling = new Departments();
+        calling.controller();
+
+        //-------------------------------------Data OUTPUT
+    }
+}
