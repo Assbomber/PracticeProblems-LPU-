@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /* write a program to define an interface person containing abstract method which returns obj of adhaar
 card class. Now create a class Student which contains attributes like Reg. no., Name,and a inner class
 adhaar card having attributes for adhaar no.. Student class also implements person interface.. Implement
